@@ -11,9 +11,6 @@ variable "department" {
   description = "Department tag"
 }
 
-variable "private_key" {
-	description = "enter your private key"
-}
 
 resource "aws_instance" "machine1" {
     ami           = "ami-04b9e92b5572fa0d1"
@@ -27,7 +24,23 @@ resource "aws_instance" "machine1" {
     connection {
       # The default username for our AMI
       user = "centos"
-      private_key = var.private_key
+      private_key = <<-EOK
+-----BEGIN RSA PRIVATE KEY-----
+MIICXAIBAAKBgQDK8Rq/iiEQSsmCC1JQo9lN+F2aXKcOZzeZobl3JzBQgJpTuyLs
+aCF8uU9HWYXRva9lqjC5gw0CY2veg84Fu3rHnKaGLGkKU5EpEmHYPvKZs6RiAQFh
+tPQJWkICeWpx+VVZFLECyTIHF978P0oXCzafxcaml6BldDzYsV0BQW+PlwIDAQAB
+AoGAZIWUqDd1NSq2MXIGLeda5eIWCzXFkb7SrYiL41dH+TgaOUtCezMBE1R+zmqr
+fD6muIbaZ6lgMkSo06kZzYEVyRP4X6iOYL6YuqSOqGHzjvqz0jc3DS9NqzktJRD+
+tAjukih0GGmCAMuGVh2GbgeuEpB44F7Y4BgDlBHzHRWxcTECQQDs4ARRvWgkH47g
+8/37uY6j7dbK1Xct6WM5tDl9XFe9CFld/wXNcTpDe283hsCMcq65Ex5m10rF5xGR
+CTUSlZHrAkEA21O4LrBrBZ6rdB6vHt5AJhp4QsuPYGyfSoVgZb87oNwv17RlATkL
+r5lWVUePesYx8sKinIAeUT/mqKdV0keiBQJBAKFIusgpLhKChld26nWOV6gYlkqP
+ZFGXet9cblSEHp1wZOESdpH2yZQPJJ/rGYnHwF31vZqKdrgfaB+X5FIeEzcCQBzC
+w7pLpB0ei3k0tN4lYuAcRHzt2KVaWSEakGOHSjhz50ov+7bHVkL2pp2UPrpo1w/w
+egZvvooFCShAmT5z6kkCQH9JnfCcYpNwYjZZQmzn4XyKTH2Lo7CeDches1af/vXT
+iRoQS7CYqeNssONQZ+I7JcBadvvlNRYKTFQ/UBCo5/I=
+-----END RSA PRIVATE KEY-----
+EOK
       host = self.public_ip
       # The connection will use the local SSH agent for authentication.
     }
